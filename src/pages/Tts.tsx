@@ -102,8 +102,8 @@ export default function Tts() {
               onClick={() => selectLang(l.id)}
               className={`rounded-xl border px-4 py-3 text-left transition ${
                 lang === l.id
-                  ? 'border-amber-300/70 bg-amber-300/10'
-                  : 'border-white/10 bg-white/[0.02] hover:border-white/20'
+                  ? 'border-blue-400/70 bg-blue-500/20'
+                  : 'border-white/20 bg-white/10 hover:border-white/30'
               }`}
             >
               <span className="mr-2 text-xs font-bold text-slate-400">{l.code}</span>
@@ -123,15 +123,15 @@ export default function Tts() {
               onClick={() => setVoiceId(v.id)}
               className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition ${
                 voiceId === v.id
-                  ? 'border-amber-300/70 bg-amber-300/10'
-                  : 'border-white/10 bg-white/[0.02] hover:border-white/20'
+                  ? 'border-blue-400/70 bg-blue-500/20'
+                  : 'border-white/20 bg-white/10 hover:border-white/30'
               }`}
             >
               <span
                 className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold ${
                   v.gender === '여'
                     ? 'bg-pink-300/20 text-pink-200'
-                    : 'bg-cyan-300/20 text-cyan-200'
+                    : 'bg-blue-400/20 text-blue-200'
                 }`}
               >
                 {v.gender}
@@ -161,7 +161,7 @@ export default function Tts() {
           value={text}
           onChange={(e) => setText(e.target.value.slice(0, MAX))}
           rows={6}
-          className="w-full resize-y rounded-xl border border-white/10 bg-white/[0.02] p-4 text-slate-100 outline-none placeholder:text-slate-500 focus:border-amber-300/50"
+          className="w-full resize-y rounded-xl border border-white/20 bg-white/10 p-4 text-white outline-none placeholder:text-white/30 focus:border-blue-400 focus:ring-2 focus:ring-blue-400"
           placeholder="읽어줄 문장을 입력하세요"
         />
       </Card>
@@ -182,7 +182,7 @@ export default function Tts() {
               step={5}
               value={rate}
               onChange={(e) => setRate(Number(e.target.value))}
-              className="w-full accent-amber-300"
+              className="w-full accent-blue-500"
             />
           </label>
           <label className="block">
@@ -197,7 +197,7 @@ export default function Tts() {
               step={5}
               value={pitch}
               onChange={(e) => setPitch(Number(e.target.value))}
-              className="w-full accent-amber-300"
+              className="w-full accent-blue-500"
             />
           </label>
         </div>
@@ -207,7 +207,7 @@ export default function Tts() {
       <button
         onClick={generate}
         disabled={loading || !text.trim()}
-        className="w-full rounded-2xl bg-gradient-to-r from-amber-300 to-yellow-200 py-4 text-base font-black text-[#0d1530] shadow-lg shadow-amber-300/20 transition hover:from-yellow-200 hover:to-amber-300 disabled:cursor-not-allowed disabled:opacity-50"
+        className="w-full rounded-xl bg-blue-500 py-4 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 disabled:cursor-not-allowed disabled:bg-blue-500/40"
       >
         {loading ? '만드는 중…' : '🎙️ 음성 생성하기'}
       </button>

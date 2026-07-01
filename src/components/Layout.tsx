@@ -7,11 +7,11 @@ import { ReactNode } from 'react'
  */
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="relative min-h-[100dvh] overflow-hidden bg-gradient-to-br from-[#050914] via-[#0b1228] to-[#060a1a] bg-animated animate-gradient-shift">
-      {/* 배경 장식 orb — 오로라 톤 (시안·바이올렛·핑크) */}
-      <div className="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-cyan-400/20 blur-[120px]" />
-      <div className="pointer-events-none absolute top-1/3 -left-24 h-96 w-96 rounded-full bg-violet-500/20 blur-[120px]" />
-      <div className="pointer-events-none absolute -bottom-32 right-1/4 h-80 w-80 rounded-full bg-fuchsia-500/15 blur-[120px]" />
+    <div className="relative min-h-[100dvh] overflow-hidden bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-900 bg-animated animate-gradient-shift">
+      {/* 배경 글로우 blob — 헥토아카데미 블루 글래스 톤 */}
+      <div className="pointer-events-none absolute -top-20 -left-20 h-72 w-72 rounded-full bg-blue-500/20 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-16 -right-16 h-80 w-80 rounded-full bg-indigo-500/20 blur-3xl" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-800/10 blur-3xl" />
 
       <div className="relative z-10">{children}</div>
     </div>

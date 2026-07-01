@@ -28,17 +28,17 @@ export default function PageShell({
           ← 홈으로
         </Link>
 
-        {/* 컬러 히어로 배너 */}
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-violet-500/20 via-indigo-500/10 to-cyan-400/15 p-7 shadow-[0_8px_40px_-12px_rgba(99,102,241,0.5)] ring-1 ring-inset ring-white/5">
-          <div className="pointer-events-none absolute -right-10 -top-12 h-40 w-40 rounded-full bg-cyan-400/25 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-12 left-1/3 h-32 w-32 rounded-full bg-fuchsia-500/20 blur-3xl" />
-          <span className="relative inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-sm font-semibold text-cyan-100 ring-1 ring-white/15 backdrop-blur">
+        {/* 글래스 히어로 배너 */}
+        <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/10 p-7 shadow-2xl backdrop-blur-md">
+          <div className="pointer-events-none absolute -right-10 -top-12 h-40 w-40 rounded-full bg-blue-500/20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-12 left-1/3 h-32 w-32 rounded-full bg-indigo-500/20 blur-3xl" />
+          <span className="relative inline-flex items-center gap-2 rounded-full bg-blue-500/20 px-4 py-1 text-sm font-semibold text-blue-100 ring-1 ring-white/20 backdrop-blur">
             {badge}
           </span>
-          <h1 className="relative mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl">
+          <h1 className="relative mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
             {title}
           </h1>
-          <p className="relative mt-3 leading-relaxed text-slate-200/90">{desc}</p>
+          <p className="relative mt-3 leading-relaxed text-white/70">{desc}</p>
         </div>
 
         <div className="mt-6 space-y-6">{children}</div>
@@ -48,23 +48,16 @@ export default function PageShell({
   )
 }
 
-/** 반투명 유리 카드 */
+/** 반투명 유리 카드 (글래스모피즘) */
 export function Card({ children }: { children: ReactNode }) {
   return (
-    <section className="rounded-[17px] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-6 shadow-[0_4px_24px_-16px_rgba(0,0,0,0.8)] ring-1 ring-inset ring-white/5">
+    <section className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-md">
       {children}
     </section>
   )
 }
 
-const STEP_COLORS = [
-  'from-cyan-300 to-sky-400',
-  'from-fuchsia-300 to-pink-400',
-  'from-amber-300 to-yellow-400',
-  'from-emerald-300 to-teal-400',
-]
-
-/** 컬러 번호칩이 붙은 섹션 제목 */
+/** 블루 번호칩이 붙은 섹션 제목 */
 export function StepTitle({
   step,
   children,
@@ -74,16 +67,13 @@ export function StepTitle({
   children: ReactNode
   right?: ReactNode
 }) {
-  const grad = STEP_COLORS[(step - 1) % STEP_COLORS.length]
   return (
     <div className="mb-4 flex items-center justify-between">
       <div className="flex items-center gap-2.5">
-        <span
-          className={`flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-br ${grad} text-xs font-black text-[#0d1530]`}
-        >
+        <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-blue-500 text-xs font-bold text-white shadow-lg shadow-blue-500/30">
           {step}
         </span>
-        <span className="text-sm font-bold text-slate-100">{children}</span>
+        <span className="text-sm font-semibold text-white">{children}</span>
       </div>
       {right}
     </div>

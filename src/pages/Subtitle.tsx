@@ -143,7 +143,7 @@ export default function Subtitle() {
                   </div>
                   <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
                     <div
-                      className="h-full bg-gradient-to-r from-cyan-300 to-amber-200 transition-all"
+                      className="h-full bg-blue-500 transition-all"
                       style={{ width: `${p}%` }}
                     />
                   </div>

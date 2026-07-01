@@ -106,7 +106,7 @@ export default function Silence() {
           step={0.005}
           value={threshold}
           onChange={(e) => setThreshold(Number(e.target.value))}
-          className="w-full accent-amber-300"
+          className="w-full accent-blue-500"
         />
         <div className="mt-1 flex justify-between text-xs text-slate-400">
           <span>적게 자름</span>
@@ -153,8 +153,8 @@ export default function Silence() {
               <div className="text-lg font-bold text-white">{result.before.toFixed(1)}초</div>
             </div>
             <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
-              <div className="text-xs text-slate-400">무음 제거 후</div>
-              <div className="text-lg font-bold text-amber-200">{result.after.toFixed(1)}초</div>
+              <div className="text-xs text-white/50">무음 제거 후</div>
+              <div className="text-lg font-bold text-blue-300">{result.after.toFixed(1)}초</div>
             </div>
           </div>
           <audio controls src={result.url} className="w-full" />
