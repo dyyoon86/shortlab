@@ -95,8 +95,9 @@ async function synthesize(
     },
   })
   const ws = (resp as any).webSocket as WebSocket | null
+  const upgradeStatus = resp.status
   if (!ws) {
-    throw new Error(`웹소켓 업그레이드 실패 (status ${resp.status})`)
+    throw new Error(`웹소켓 업그레이드 실패 (status ${upgradeStatus})`)
   }
   ws.accept()
 
@@ -114,8 +115,9 @@ async function synthesize(
       try { ws.close() } catch { /* noop */ }
       fn()
     }
+    let errorFired = false
     const timer = setTimeout(() => {
-      finish(() => reject(new Error('TTS 응답 시간 초과 (30s)')))
+      finish(() => reject(new Error(`TTS 응답 시간 초과 (30s) [upgrade=${upgradeStatus}, errorFired=${errorFired}, chunks=${chunks.length}]`)))
     }, 30000)
 
     ws.addEventListener('message', (evt: MessageEvent) => {
@@ -148,6 +150,7 @@ async function synthesize(
     // error 이벤트는 상세가 거의 없다. 메시지만 기록하고, 바로 뒤따라오는
     // close 이벤트의 code/reason으로 진짜 원인을 판단한다.
     ws.addEventListener('error', (evt: Event) => {
+      errorFired = true
       lastError = (evt as any)?.message || (evt as any)?.error?.message || ''
     })
     ws.addEventListener('close', (evt: CloseEvent) => {
@@ -163,7 +166,7 @@ async function synthesize(
       }
       const code = (evt as any)?.code ?? '?'
       const reason = (evt as any)?.reason || lastError || '(사유 없음)'
-      finish(() => reject(new Error(`웹소켓 종료 code=${code} reason=${reason}`)))
+      finish(() => reject(new Error(`웹소켓 종료 code=${code} reason=${reason} [upgrade=${upgradeStatus}]`)))
     })
 
     // 1) 오디오 출력 포맷 설정
