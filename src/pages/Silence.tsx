@@ -98,7 +98,7 @@ export default function Silence() {
       desc="영상·오디오에서 아무 소리도 없는 조용한 구간을 자동으로 찾아 잘라내요. 결과는 오디오(wav)로 나와요. 파일은 서버로 올라가지 않아요."
     >
       <Card>
-        <div className="mb-4 text-sm font-bold text-slate-300">민감도</div>
+        <div className="mb-4 text-sm font-bold text-gray-700">민감도</div>
         <input
           type="range"
           min={0.005}
@@ -108,17 +108,17 @@ export default function Silence() {
           onChange={(e) => setThreshold(Number(e.target.value))}
           className="w-full accent-blue-500"
         />
-        <div className="mt-1 flex justify-between text-xs text-slate-400">
+        <div className="mt-1 flex justify-between text-xs text-gray-400">
           <span>적게 자름</span>
           <span>많이 자름</span>
         </div>
       </Card>
 
       <Card>
-        <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-white/20 bg-white/[0.02] py-12 text-center transition hover:border-white/40">
+        <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-gray-300 bg-gray-50 py-12 text-center transition hover:border-blue-400 hover:bg-blue-50">
           <span className="text-4xl">🔇</span>
-          <span className="font-semibold text-white">영상/오디오 파일 올리기</span>
-          <span className="text-xs text-slate-400">mp4 · mov · mp3 · wav 등</span>
+          <span className="font-semibold text-gray-900">영상/오디오 파일 올리기</span>
+          <span className="text-xs text-gray-400">mp4 · mov · mp3 · wav 등</span>
           <input
             type="file"
             accept="video/*,audio/*"
@@ -133,35 +133,35 @@ export default function Silence() {
       </Card>
 
       {busy && (
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm text-slate-200">
+        <div className="rounded-xl border border-gray-100 bg-white p-4 text-sm text-gray-700">
           처리 중…
         </div>
       )}
 
       {error && (
-        <div className="rounded-xl border border-red-400/30 bg-red-400/10 p-4 text-sm text-red-200">
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-600">
           {error}
         </div>
       )}
 
       {result && (
         <Card>
-          <div className="mb-3 text-sm font-bold text-slate-300">결과</div>
+          <div className="mb-3 text-sm font-bold text-gray-700">결과</div>
           <div className="mb-4 grid grid-cols-2 gap-3 text-center">
-            <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
-              <div className="text-xs text-slate-400">원본 길이</div>
-              <div className="text-lg font-bold text-white">{result.before.toFixed(1)}초</div>
+            <div className="rounded-xl border border-gray-100 bg-gray-50 p-3">
+              <div className="text-xs text-gray-400">원본 길이</div>
+              <div className="text-lg font-bold text-gray-900">{result.before.toFixed(1)}초</div>
             </div>
-            <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
-              <div className="text-xs text-white/50">무음 제거 후</div>
-              <div className="text-lg font-bold text-blue-300">{result.after.toFixed(1)}초</div>
+            <div className="rounded-xl border border-blue-100 bg-blue-50 p-3">
+              <div className="text-xs text-blue-600/70">무음 제거 후</div>
+              <div className="text-lg font-bold text-blue-700">{result.after.toFixed(1)}초</div>
             </div>
           </div>
           <audio controls src={result.url} className="w-full" />
           <a
             href={result.url}
             download="silence-removed.wav"
-            className="mt-4 inline-flex rounded-xl border border-white/15 bg-white/[0.03] px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+            className="mt-4 inline-flex rounded-xl border border-gray-200 bg-white px-5 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
           >
             ⬇ wav 다운로드
           </a>

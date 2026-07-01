@@ -102,12 +102,12 @@ export default function Tts() {
               onClick={() => selectLang(l.id)}
               className={`rounded-xl border px-4 py-3 text-left transition ${
                 lang === l.id
-                  ? 'border-blue-400/70 bg-blue-500/20'
-                  : 'border-white/20 bg-white/10 hover:border-white/30'
+                  ? 'border-blue-600 bg-blue-50'
+                  : 'border-gray-200 bg-white hover:border-gray-300'
               }`}
             >
-              <span className="mr-2 text-xs font-bold text-slate-400">{l.code}</span>
-              <span className="font-semibold text-white">{l.label}</span>
+              <span className="mr-2 text-xs font-bold text-gray-400">{l.code}</span>
+              <span className="font-semibold text-gray-900">{l.label}</span>
             </button>
           ))}
         </div>
@@ -123,22 +123,22 @@ export default function Tts() {
               onClick={() => setVoiceId(v.id)}
               className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition ${
                 voiceId === v.id
-                  ? 'border-blue-400/70 bg-blue-500/20'
-                  : 'border-white/20 bg-white/10 hover:border-white/30'
+                  ? 'border-blue-600 bg-blue-50'
+                  : 'border-gray-200 bg-white hover:border-gray-300'
               }`}
             >
               <span
                 className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold ${
                   v.gender === '여'
-                    ? 'bg-pink-300/20 text-pink-200'
-                    : 'bg-blue-400/20 text-blue-200'
+                    ? 'bg-pink-50 text-pink-600'
+                    : 'bg-blue-50 text-blue-600'
                 }`}
               >
                 {v.gender}
               </span>
               <span>
-                <span className="block font-semibold text-white">{v.label}</span>
-                <span className="block text-xs text-slate-400">{v.desc}</span>
+                <span className="block font-semibold text-gray-900">{v.label}</span>
+                <span className="block text-xs text-gray-400">{v.desc}</span>
               </span>
             </button>
           ))}
@@ -150,7 +150,7 @@ export default function Tts() {
         <StepTitle
           step={3}
           right={
-            <span className="text-xs text-slate-400">
+            <span className="text-xs text-gray-400">
               {count} / {MAX}자
             </span>
           }
@@ -161,7 +161,7 @@ export default function Tts() {
           value={text}
           onChange={(e) => setText(e.target.value.slice(0, MAX))}
           rows={6}
-          className="w-full resize-y rounded-xl border border-white/20 bg-white/10 p-4 text-white outline-none placeholder:text-white/30 focus:border-blue-400 focus:ring-2 focus:ring-blue-400"
+          className="w-full resize-y rounded-xl border border-gray-200 bg-white p-4 text-gray-900 outline-none placeholder:text-gray-400 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
           placeholder="읽어줄 문장을 입력하세요"
         />
       </Card>
@@ -171,7 +171,7 @@ export default function Tts() {
         <StepTitle step={4}>속도 · 톤</StepTitle>
         <div className="grid gap-6 sm:grid-cols-2">
           <label className="block">
-            <span className="mb-1 flex justify-between text-xs text-slate-400">
+            <span className="mb-1 flex justify-between text-xs text-gray-500">
               <span>속도</span>
               <span>{rate >= 0 ? '+' : ''}{rate}%</span>
             </span>
@@ -182,11 +182,11 @@ export default function Tts() {
               step={5}
               value={rate}
               onChange={(e) => setRate(Number(e.target.value))}
-              className="w-full accent-blue-500"
+              className="w-full accent-blue-600"
             />
           </label>
           <label className="block">
-            <span className="mb-1 flex justify-between text-xs text-slate-400">
+            <span className="mb-1 flex justify-between text-xs text-gray-500">
               <span>톤 (높낮이)</span>
               <span>{pitch >= 0 ? '+' : ''}{pitch}Hz</span>
             </span>
@@ -197,7 +197,7 @@ export default function Tts() {
               step={5}
               value={pitch}
               onChange={(e) => setPitch(Number(e.target.value))}
-              className="w-full accent-blue-500"
+              className="w-full accent-blue-600"
             />
           </label>
         </div>
@@ -207,25 +207,25 @@ export default function Tts() {
       <button
         onClick={generate}
         disabled={loading || !text.trim()}
-        className="w-full rounded-xl bg-blue-500 py-4 text-base font-semibold text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 disabled:cursor-not-allowed disabled:bg-blue-500/40"
+        className="w-full rounded-xl bg-blue-600 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-blue-600/40"
       >
         {loading ? '만드는 중…' : '🎙️ 음성 생성하기'}
       </button>
 
       {error && (
-        <div className="rounded-xl border border-red-400/30 bg-red-400/10 p-4 text-sm text-red-200">
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-600">
           {error}
         </div>
       )}
 
       {audioUrl && (
         <Card>
-          <div className="mb-3 text-sm font-bold text-slate-300">결과</div>
+          <div className="mb-3 text-sm font-bold text-gray-700">결과</div>
           <audio controls src={audioUrl} className="w-full" />
           <a
             href={audioUrl}
             download="shorts-lab-tts.mp3"
-            className="mt-4 inline-flex rounded-xl border border-white/15 bg-white/[0.03] px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+            className="mt-4 inline-flex rounded-xl border border-gray-200 bg-white px-5 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
           >
             ⬇ mp3 다운로드
           </a>

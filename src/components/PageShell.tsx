@@ -20,38 +20,36 @@ export default function PageShell({
 
       <main className="flex-1 px-6 py-10 lg:px-12 lg:py-12">
         <div className="mx-auto w-full max-w-4xl">
-        {/* 모바일에서만 보이는 홈 링크 */}
-        <Link
-          to="/"
-          className="mb-4 inline-flex items-center gap-1 text-sm text-slate-400 transition hover:text-white lg:hidden"
-        >
-          ← 홈으로
-        </Link>
+          {/* 모바일에서만 보이는 홈 링크 */}
+          <Link
+            to="/"
+            className="mb-4 inline-flex items-center gap-1 text-sm text-gray-500 transition hover:text-gray-900 lg:hidden"
+          >
+            ← 홈으로
+          </Link>
 
-        {/* 글래스 히어로 배너 */}
-        <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/10 p-7 shadow-2xl backdrop-blur-md">
-          <div className="pointer-events-none absolute -right-10 -top-12 h-40 w-40 rounded-full bg-blue-500/20 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-12 left-1/3 h-32 w-32 rounded-full bg-indigo-500/20 blur-3xl" />
-          <span className="relative inline-flex items-center gap-2 rounded-full bg-blue-500/20 px-4 py-1 text-sm font-semibold text-blue-100 ring-1 ring-white/20 backdrop-blur">
-            {badge}
-          </span>
-          <h1 className="relative mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            {title}
-          </h1>
-          <p className="relative mt-3 leading-relaxed text-white/70">{desc}</p>
-        </div>
+          {/* 히어로 — 소프트 블루 강조 카드 */}
+          <div className="rounded-2xl border border-blue-100 bg-blue-50 p-7">
+            <span className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-4 py-1 text-sm font-semibold text-white">
+              {badge}
+            </span>
+            <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              {title}
+            </h1>
+            <p className="mt-3 leading-relaxed text-gray-600">{desc}</p>
+          </div>
 
-        <div className="mt-6 space-y-6">{children}</div>
+          <div className="mt-6 space-y-6">{children}</div>
         </div>
       </main>
     </div>
   )
 }
 
-/** 반투명 유리 카드 (글래스모피즘) */
+/** 흰 카드 (라이트 대시보드) */
 export function Card({ children }: { children: ReactNode }) {
   return (
-    <section className="rounded-2xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-md">
+    <section className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
       {children}
     </section>
   )
@@ -70,10 +68,10 @@ export function StepTitle({
   return (
     <div className="mb-4 flex items-center justify-between">
       <div className="flex items-center gap-2.5">
-        <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-blue-500 text-xs font-bold text-white shadow-lg shadow-blue-500/30">
+        <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-blue-600 text-xs font-bold text-white">
           {step}
         </span>
-        <span className="text-sm font-semibold text-white">{children}</span>
+        <span className="text-sm font-semibold text-gray-900">{children}</span>
       </div>
       {right}
     </div>

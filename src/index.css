@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html,
@@ -14,14 +14,9 @@ body,
 
 body {
   margin: 0;
-  background-color: #0f172b;
-  color: #ffffff;
+  background-color: #f9fafb;
+  color: #101828;
   font-family: 'Pretendard Variable', Pretendard, 'Apple SD Gothic Neo',
     'Noto Sans KR', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-}
-
-/* 큰 그라데이션 배경이 부드럽게 흐르도록 background-size 확장 */
-.bg-animated {
-  background-size: 200% 200%;
 }

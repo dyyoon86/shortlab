@@ -113,10 +113,10 @@ export default function Subtitle() {
       desc="영상을 올리면 그 안의 한국어 말소리를 듣고 자막(SRT)으로 만들어 드려요. 파일은 서버로 올라가지 않고 브라우저 안에서만 처리돼요."
     >
       <Card>
-        <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-white/20 bg-white/[0.02] py-12 text-center transition hover:border-white/40">
+        <label className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-gray-300 bg-gray-50 py-12 text-center transition hover:border-blue-400 hover:bg-blue-50">
           <span className="text-4xl">📹</span>
-          <span className="font-semibold text-white">영상/오디오 파일 올리기</span>
-          <span className="text-xs text-slate-400">mp4 · mov · mp3 · wav 등</span>
+          <span className="font-semibold text-gray-900">영상/오디오 파일 올리기</span>
+          <span className="text-xs text-gray-400">mp4 · mov · mp3 · wav 등</span>
           <input
             type="file"
             accept="video/*,audio/*"
@@ -132,16 +132,16 @@ export default function Subtitle() {
 
       {(busy || status) && (
         <Card>
-          <div className="text-sm text-slate-200">{status}</div>
+          <div className="text-sm text-gray-700">{status}</div>
           {Object.entries(downloads).length > 0 && (
             <div className="mt-3 space-y-2">
               {Object.entries(downloads).map(([file, p]) => (
                 <div key={file}>
-                  <div className="mb-1 flex justify-between text-xs text-slate-400">
+                  <div className="mb-1 flex justify-between text-xs text-gray-500">
                     <span className="truncate">{file}</span>
                     <span>{Math.round(p)}%</span>
                   </div>
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-gray-100">
                     <div
                       className="h-full bg-blue-500 transition-all"
                       style={{ width: `${p}%` }}
@@ -155,7 +155,7 @@ export default function Subtitle() {
       )}
 
       {error && (
-        <div className="rounded-xl border border-red-400/30 bg-red-400/10 p-4 text-sm text-red-200">
+        <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-600">
           {error}
         </div>
       )}
@@ -163,15 +163,15 @@ export default function Subtitle() {
       {srt && (
         <Card>
           <div className="mb-3 flex items-center justify-between">
-            <div className="text-sm font-bold text-slate-300">자막 결과</div>
+            <div className="text-sm font-bold text-gray-700">자막 결과</div>
             <button
               onClick={dl}
-              className="rounded-xl border border-white/15 bg-white/[0.03] px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
+              className="rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 transition hover:bg-gray-50"
             >
               ⬇ SRT 다운로드
             </button>
           </div>
-          <pre className="max-h-80 overflow-auto whitespace-pre-wrap rounded-xl border border-white/10 bg-black/30 p-4 text-xs text-slate-200">
+          <pre className="max-h-80 overflow-auto whitespace-pre-wrap rounded-xl border border-gray-100 bg-gray-50 p-4 text-xs text-gray-700">
             {srt}
           </pre>
         </Card>
