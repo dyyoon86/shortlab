@@ -104,9 +104,18 @@ async function synthesize(
   const chunks: Uint8Array[] = []
 
   return new Promise<Uint8Array>((resolve, reject) => {
-    const timer = setTimeout(() => {
+    // 한 번만 종료 처리하고 close 이벤트의 code/reason까지 진단에 담는다.
+    let settled = false
+    let lastError = ''
+    const finish = (fn: () => void) => {
+      if (settled) return
+      settled = true
+      clearTimeout(timer)
       try { ws.close() } catch { /* noop */ }
-      reject(new Error('TTS 응답 시간 초과'))
+      fn()
+    }
+    const timer = setTimeout(() => {
+      finish(() => reject(new Error('TTS 응답 시간 초과 (30s)')))
     }, 30000)
 
     ws.addEventListener('message', (evt: MessageEvent) => {
@@ -114,19 +123,17 @@ async function synthesize(
       if (typeof data === 'string') {
         // 텍스트 제어 메시지
         if (data.includes('Path:turn.end')) {
-          clearTimeout(timer)
-          try { ws.close() } catch { /* noop */ }
           let total = 0
           for (const c of chunks) total += c.length
           if (total === 0) {
             // 간헐적으로 오디오 없이 turn.end만 오는 경우 → 빈 200 대신 에러로 처리(재시도 유도)
-            reject(new Error('빈 응답을 받았어요. 잠시 후 다시 시도해주세요.'))
+            finish(() => reject(new Error('빈 응답을 받았어요. 잠시 후 다시 시도해주세요.')))
             return
           }
           const out = new Uint8Array(total)
           let off = 0
           for (const c of chunks) { out.set(c, off); off += c.length }
-          resolve(out)
+          finish(() => resolve(out))
         }
       } else {
         // 바이너리 오디오 프레임: [2바이트 헤더길이][헤더][오디오]
@@ -138,14 +145,25 @@ async function synthesize(
       }
     })
 
-    ws.addEventListener('error', () => {
-      clearTimeout(timer)
-      reject(new Error('웹소켓 오류'))
+    // error 이벤트는 상세가 거의 없다. 메시지만 기록하고, 바로 뒤따라오는
+    // close 이벤트의 code/reason으로 진짜 원인을 판단한다.
+    ws.addEventListener('error', (evt: Event) => {
+      lastError = (evt as any)?.message || (evt as any)?.error?.message || ''
     })
-    ws.addEventListener('close', () => {
-      // turn.end 없이 닫히면(아직 미해결) 에러
-      clearTimeout(timer)
-      if (chunks.length === 0) reject(new Error('오디오를 받지 못했습니다'))
+    ws.addEventListener('close', (evt: CloseEvent) => {
+      if (chunks.length > 0) {
+        // 오디오는 받았는데 turn.end 전에 닫힘 → 받은 만큼이라도 반환
+        let total = 0
+        for (const c of chunks) total += c.length
+        const out = new Uint8Array(total)
+        let off = 0
+        for (const c of chunks) { out.set(c, off); off += c.length }
+        finish(() => resolve(out))
+        return
+      }
+      const code = (evt as any)?.code ?? '?'
+      const reason = (evt as any)?.reason || lastError || '(사유 없음)'
+      finish(() => reject(new Error(`웹소켓 종료 code=${code} reason=${reason}`)))
     })
 
     // 1) 오디오 출력 포맷 설정
