@@ -118,6 +118,11 @@ async function synthesize(
           try { ws.close() } catch { /* noop */ }
           let total = 0
           for (const c of chunks) total += c.length
+          if (total === 0) {
+            // 간헐적으로 오디오 없이 turn.end만 오는 경우 → 빈 200 대신 에러로 처리(재시도 유도)
+            reject(new Error('빈 응답을 받았어요. 잠시 후 다시 시도해주세요.'))
+            return
+          }
           const out = new Uint8Array(total)
           let off = 0
           for (const c of chunks) { out.set(c, off); off += c.length }
