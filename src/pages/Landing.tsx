@@ -72,7 +72,7 @@ export default function Landing() {
       </Link>
 
       <footer className="mt-16 text-xs text-slate-500">
-        © SHORTS-LAB
+        © 투두TV 랩
       </footer>
     </main>
   )

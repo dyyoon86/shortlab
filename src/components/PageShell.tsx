@@ -18,7 +18,8 @@ export default function PageShell({
     <div className="flex flex-col lg:flex-row">
       <Sidebar />
 
-      <main className="mx-auto w-full max-w-3xl px-6 py-10 lg:mx-0 lg:px-10">
+      <main className="flex-1 px-6 py-10 lg:px-12 lg:py-12">
+        <div className="mx-auto w-full max-w-4xl">
         {/* 모바일에서만 보이는 홈 링크 */}
         <Link
           to="/"
@@ -28,18 +29,20 @@ export default function PageShell({
         </Link>
 
         {/* 컬러 히어로 배너 */}
-        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-500/15 via-fuchsia-500/10 to-amber-400/15 p-6">
-          <div className="pointer-events-none absolute -right-8 -top-10 h-32 w-32 rounded-full bg-fuchsia-400/20 blur-2xl" />
-          <span className="relative inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-sm font-semibold text-cyan-100 ring-1 ring-white/15">
+        <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-violet-500/20 via-indigo-500/10 to-cyan-400/15 p-7 shadow-[0_8px_40px_-12px_rgba(99,102,241,0.5)] ring-1 ring-inset ring-white/5">
+          <div className="pointer-events-none absolute -right-10 -top-12 h-40 w-40 rounded-full bg-cyan-400/25 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-12 left-1/3 h-32 w-32 rounded-full bg-fuchsia-500/20 blur-3xl" />
+          <span className="relative inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-sm font-semibold text-cyan-100 ring-1 ring-white/15 backdrop-blur">
             {badge}
           </span>
-          <h1 className="relative mt-4 text-3xl font-black text-white sm:text-4xl">
+          <h1 className="relative mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl">
             {title}
           </h1>
           <p className="relative mt-3 leading-relaxed text-slate-200/90">{desc}</p>
         </div>
 
         <div className="mt-6 space-y-6">{children}</div>
+        </div>
       </main>
     </div>
   )
@@ -48,7 +51,7 @@ export default function PageShell({
 /** 반투명 유리 카드 */
 export function Card({ children }: { children: ReactNode }) {
   return (
-    <section className="rounded-[17px] border border-white/10 bg-white/[0.04] p-6">
+    <section className="rounded-[17px] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-6 shadow-[0_4px_24px_-16px_rgba(0,0,0,0.8)] ring-1 ring-inset ring-white/5">
       {children}
     </section>
   )

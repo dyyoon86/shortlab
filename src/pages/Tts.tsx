@@ -42,7 +42,7 @@ const MAX = 2000
 export default function Tts() {
   const [lang, setLang] = useState<Lang>('ko')
   const [voiceId, setVoiceId] = useState(VOICES.ko[0].id)
-  const [text, setText] = useState('안녕하세요. 쇼츠 랩입니다. 오늘도 즐거운 쇼츠 만드세요!')
+  const [text, setText] = useState('안녕하세요. 투두TV 랩입니다. 오늘도 즐거운 쇼츠 만드세요!')
   const [rate, setRate] = useState(0) // %
   const [pitch, setPitch] = useState(0) // Hz
   const [loading, setLoading] = useState(false)

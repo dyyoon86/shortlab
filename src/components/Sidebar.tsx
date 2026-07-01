@@ -17,7 +17,7 @@ export default function Sidebar() {
           🎬
         </span>
         <span>
-          <span className="block font-black text-white">쇼츠 랩</span>
+          <span className="block font-black text-white">투두TV 랩</span>
           <span className="block text-xs text-slate-400">무료 · 로그인 없음</span>
         </span>
       </Link>
