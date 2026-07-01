@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #04081a;
+  color: #e5e9f5;
+  font-family: 'Pretendard Variable', Pretendard, 'Apple SD Gothic Neo',
+    'Noto Sans KR', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 큰 그라데이션 배경이 부드럽게 흐르도록 background-size 확장 */
+.bg-animated {
+  background-size: 200% 200%;
+}
