@@ -8,18 +8,20 @@ export default function PageShell({
   title,
   desc,
   children,
+  wide,
 }: {
   badge: string
   title: string
   desc: string
   children: ReactNode
+  wide?: boolean
 }) {
   return (
     <div className="flex flex-col lg:flex-row">
       <Sidebar />
 
       <main className="flex-1 px-6 py-10 lg:px-12 lg:py-12">
-        <div className="mx-auto w-full max-w-4xl">
+        <div className={`mx-auto w-full ${wide ? 'max-w-7xl' : 'max-w-4xl'}`}>
           {/* 모바일에서만 보이는 홈 링크 */}
           <Link
             to="/"

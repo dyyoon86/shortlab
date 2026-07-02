@@ -132,40 +132,33 @@
   footer{text-align:center; color:var(--ink-dim); font-size:14px; margin-top:64px; padding-top:28px; border-top:1px solid var(--border-2)}
   footer strong{color:var(--blue)}
 
-  /* ===== Screen guide (mockups) ===== */
-  .screen{border:1px solid var(--border-2); border-radius:16px; overflow:hidden; margin:20px 0; background:#fff; box-shadow:0 1px 3px rgba(16,24,40,.07)}
-  .screen .bar{display:flex; align-items:center; gap:9px; padding:9px 13px; background:#eef1f6; border-bottom:1px solid var(--border-2)}
-  .screen .dots{display:flex; gap:5px}
-  .screen .dots i{width:9px; height:9px; border-radius:50%; display:block; background:#cbd5e1}
-  .screen .dots i:nth-child(1){background:#f87171}
-  .screen .dots i:nth-child(2){background:#fbbf24}
-  .screen .dots i:nth-child(3){background:#34d399}
-  .screen .url{flex:1; background:#fff; border:1px solid var(--border-2); border-radius:8px; padding:5px 11px; font-size:12px; color:var(--ink-dim); font-family:"Geist Mono",Consolas,monospace}
-  .screen .view{padding:24px 22px 30px; position:relative; min-height:110px}
-  .screen figcaption.cap{padding:12px 16px; background:var(--blue-50); color:var(--blue-700); font-size:13.5px; font-weight:600; border-top:1px solid var(--blue-100)}
-  .screen figcaption.cap b{color:var(--blue)}
-  .mk-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:18px}
-  .mk-logo{font-weight:800; font-size:16px; color:var(--ink)}
-  .mk-lbl{font-size:12px; color:var(--ink-dim); margin:12px 0 4px; font-weight:600}
-  .field{height:36px; border:1px solid var(--border-2); border-radius:9px; background:#fafbfc; margin:2px 0}
-  .field.val{display:flex; align-items:center; padding:0 12px; font-size:13px; color:var(--ink); font-family:"Geist Mono",Consolas,monospace; background:#fff}
-  .skel{height:12px; border-radius:6px; background:#eef1f6; margin:10px 0; width:82%}
-  .skel.s2{width:56%}
-  .btn-demo{display:inline-block; padding:9px 17px; border-radius:10px; font-weight:700; font-size:13px}
-  .btn-primary{background:var(--blue); color:#fff}
-  .btn-dark{background:#111827; color:#fff}
-  .btn-ghost{background:#fff; border:1px solid var(--border-2); color:var(--ink-dim)}
-  .hot{position:relative; box-shadow:0 0 0 3px rgba(21,93,252,.35)}
-  .hot::after{content:"👆 여기 클릭"; position:absolute; top:-31px; left:50%; transform:translateX(-50%); white-space:nowrap;
-    background:var(--gray-900); color:#fff; font-size:11px; font-weight:700; padding:4px 9px; border-radius:7px}
-  .hot::before{content:""; position:absolute; top:-9px; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:var(--gray-900)}
-  .repo-row{display:flex; justify-content:space-between; align-items:center; padding:11px 13px; border:1px solid var(--border-2); border-radius:10px; margin:9px 0; font-size:14px; font-weight:600}
-  .repo-row.muted{color:var(--ink-soft)}
-  .chat{max-width:80%; padding:10px 14px; border-radius:14px; font-size:13.5px; margin:9px 0; line-height:1.6}
-  .chat.me{background:var(--blue); color:#fff; margin-left:auto; border-bottom-right-radius:4px}
-  .chat.ai{background:#f1f3f7; color:var(--ink); border-bottom-left-radius:4px}
+  /* ===== Screenshot slot (직접 캡처 넣는 자리) ===== */
+  .shot{margin:22px 0}
+  .shot img{display:block; width:100%; border:1px solid var(--border-2); border-radius:14px; box-shadow:0 1px 3px rgba(16,24,40,.08)}
+  .shot .ph{display:none; flex-direction:column; align-items:center; justify-content:center; gap:7px; text-align:center;
+    min-height:210px; padding:28px; border:2px dashed #c3cede; border-radius:14px; background:#f8fafc}
+  .shot .ph .ico{font-size:34px; opacity:.85}
+  .shot .ph b{font-size:15px; color:var(--ink)}
+  .shot .ph>span{font-size:13px; color:var(--ink-dim); max-width:340px; line-height:1.5}
+  .shot .ph code{margin-top:3px; font-family:"Geist Mono",Consolas,monospace; font-size:12px; color:var(--blue); background:var(--blue-50); padding:3px 10px; border-radius:6px}
+  .shot figcaption{margin-top:11px; font-size:13.5px; font-weight:600; color:var(--blue-700)}
+  .shot figcaption b{color:var(--blue)}
+
+  /* ===== 바로가기 링크 박스 ===== */
+  .linkbox{display:flex; align-items:center; gap:9px; margin:0 0 20px; padding:11px 15px;
+    border:1px solid var(--blue-100); background:var(--blue-50); border-radius:12px; font-size:14px; font-weight:700; color:var(--blue-700)}
+  .linkbox a{color:var(--blue); text-decoration:none; word-break:break-all}
+  .linkbox a:hover{text-decoration:underline}
+
+  /* ===== PDF 다운로드 버튼 (떠다니는) ===== */
+  .pdf-dl{position:fixed; top:18px; right:18px; z-index:50; display:inline-flex; align-items:center; gap:6px;
+    background:var(--blue); color:#fff; font-weight:700; font-size:14px; text-decoration:none;
+    padding:10px 16px; border-radius:12px; box-shadow:0 6px 18px rgba(21,93,252,.38); transition:filter .15s, transform .15s}
+  .pdf-dl:hover{filter:brightness(1.08); transform:translateY(-1px)}
+  @media (max-width:640px){.pdf-dl{top:10px; right:10px; padding:8px 12px; font-size:13px}}
 
   @media print{
+    .pdf-dl{display:none}
     body{background:#fff}
     .wrap{max-width:100%}
     .hero,.toc,.tool,details{box-shadow:none}
@@ -176,6 +169,7 @@
 </style>
 </head>
 <body>
+<a class="pdf-dl" href="antigravity-deploy-guide.pdf" download>📄 PDF 다운로드</a>
 <div class="wrap">
 
   <!-- ============ COVER ============ -->
@@ -286,22 +280,18 @@
 
     <p><strong>안티그래비티(Antigravity)</strong>는 구글에서 만든, 컴퓨터에 설치해서 쓰는 프로그램이에요. 채팅창에 원하는 걸 적으면 AI가 알아서 웹사이트를 만들어 줍니다.</p>
 
-    <figure class="screen">
-      <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">antigravity.google</span></div>
-      <div class="view">
-        <div class="mk-top"><span class="mk-logo">🪄 Antigravity</span><span class="btn-demo hot btn-primary">Download</span></div>
-        <div class="skel"></div><div class="skel s2"></div>
-      </div>
-      <figcaption class="cap">👉 오른쪽 위 <b>Download</b> 클릭 → 내 컴퓨터(윈도우/맥)용 설치파일이 받아집니다</figcaption>
+    <div class="linkbox">🔗 바로가기 <a href="https://antigravity.google" target="_blank" rel="noopener">https://antigravity.google</a></div>
+
+    <figure class="shot">
+      <img src="images/01-antigravity-download.png" alt="안티그래비티 다운로드 화면" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div class="ph"><span class="ico">📸</span><b>여기에 실제 캡처를 넣으세요</b><span>antigravity.google 에서 Download 버튼이 보이는 화면</span><code>images/01-antigravity-download.png</code></div>
+      <figcaption>👉 오른쪽 위 <b>Download</b> 클릭 → 내 컴퓨터(윈도우/맥)용 설치파일 받기</figcaption>
     </figure>
 
-    <figure class="screen">
-      <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">Antigravity — 프로그램 첫 실행 화면</span></div>
-      <div class="view" style="text-align:center; padding-top:14px">
-        <span class="mk-logo" style="display:block; margin-bottom:18px">🪄 Antigravity</span>
-        <span class="btn-demo hot btn-ghost" style="display:inline-block">🔵 &nbsp;Sign in with Google</span>
-      </div>
-      <figcaption class="cap">👉 설치 후 첫 실행 → <b>Sign in with Google</b> 눌러 평소 쓰는 지메일로 로그인</figcaption>
+    <figure class="shot">
+      <img src="images/02-antigravity-login.png" alt="안티그래비티 구글 로그인 화면" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div class="ph"><span class="ico">📸</span><b>여기에 실제 캡처를 넣으세요</b><span>설치 후 첫 실행 — Sign in with Google 화면</span><code>images/02-antigravity-login.png</code></div>
+      <figcaption>👉 <b>Sign in with Google</b> 눌러 평소 쓰는 지메일로 로그인</figcaption>
     </figure>
 
     <ol class="steps">
@@ -341,24 +331,18 @@
 
     <p><strong>깃허브(GitHub)</strong>는 만든 결과물을 올려두는 창고예요. 나중에 버셀이 이 창고를 들여다보고 사이트를 띄워줍니다. 그래서 <strong>깃허브 계정이 꼭 필요</strong>해요.</p>
 
-    <figure class="screen">
-      <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">github.com</span></div>
-      <div class="view">
-        <div class="mk-top"><span class="mk-logo">🐙 GitHub</span><span class="btn-demo hot btn-primary">Sign up</span></div>
-        <div class="skel"></div><div class="skel s2"></div>
-      </div>
-      <figcaption class="cap">👉 오른쪽 위 <b>Sign up</b> 클릭 (로그인 Sign in 아님, 회원가입 Sign up!)</figcaption>
+    <div class="linkbox">🔗 바로가기 <a href="https://github.com" target="_blank" rel="noopener">https://github.com</a></div>
+
+    <figure class="shot">
+      <img src="images/03-github-signup.png" alt="깃허브 Sign up 화면" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div class="ph"><span class="ico">📸</span><b>여기에 실제 캡처를 넣으세요</b><span>github.com 오른쪽 위 Sign up 버튼이 보이는 화면</span><code>images/03-github-signup.png</code></div>
+      <figcaption>👉 오른쪽 위 <b>Sign up</b> 클릭 (로그인 Sign in 아님, 회원가입 Sign up!)</figcaption>
     </figure>
 
-    <figure class="screen">
-      <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">github.com/signup</span></div>
-      <div class="view">
-        <p class="mk-lbl">Email (이메일)</p><div class="field"></div>
-        <p class="mk-lbl">Password (비밀번호)</p><div class="field"></div>
-        <p class="mk-lbl">Username (사용자 이름 — 나중에 주소에 들어감)</p><div class="field"></div>
-        <span class="btn-demo hot btn-primary" style="display:block; text-align:center; margin-top:16px">Continue</span>
-      </div>
-      <figcaption class="cap">👉 순서대로 입력 → <b>Continue</b> → 사람 확인 퍼즐 → 이메일 인증코드 입력 → <b>Free(무료)</b> 선택</figcaption>
+    <figure class="shot">
+      <img src="images/04-github-signup-form.png" alt="깃허브 가입 폼 화면" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div class="ph"><span class="ico">📸</span><b>여기에 실제 캡처를 넣으세요</b><span>이메일·비밀번호·사용자 이름 입력하는 가입 폼 화면</span><code>images/04-github-signup-form.png</code></div>
+      <figcaption>👉 순서대로 입력 → <b>Continue</b> → 퍼즐 인증 → 이메일 인증코드 → <b>Free(무료)</b> 선택</figcaption>
     </figure>
 
     <ol class="steps">
@@ -399,14 +383,12 @@
 
     <p><strong>버셀(Vercel)</strong>은 깃허브 창고를 연결해두면, 그 안의 내용을 자동으로 인터넷에 띄워주는 서비스예요. <strong>깃허브 계정으로 바로 로그인</strong>하는 게 제일 편합니다. (그래야 다음에 창고 연결이 매끄러워요.)</p>
 
-    <figure class="screen">
-      <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">vercel.com/signup</span></div>
-      <div class="view" style="text-align:center; padding-top:14px">
-        <span class="mk-logo" style="display:block; margin-bottom:18px">▲ Vercel</span>
-        <span class="btn-demo hot btn-dark" style="display:inline-block">🐙 &nbsp;Continue with GitHub</span>
-        <div style="margin-top:11px"><span class="btn-demo btn-ghost">✉️ &nbsp;Continue with Email</span></div>
-      </div>
-      <figcaption class="cap">👉 <b>Continue with GitHub</b> 선택 → 깃허브 로그인 → <b>Authorize Vercel</b> 허용 → <b>Hobby(무료)</b> 선택</figcaption>
+    <div class="linkbox">🔗 바로가기 <a href="https://vercel.com" target="_blank" rel="noopener">https://vercel.com</a></div>
+
+    <figure class="shot">
+      <img src="images/05-vercel-signup.png" alt="버셀 회원가입 화면" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div class="ph"><span class="ico">📸</span><b>여기에 실제 캡처를 넣으세요</b><span>vercel.com 가입 화면 — Continue with GitHub 버튼</span><code>images/05-vercel-signup.png</code></div>
+      <figcaption>👉 <b>Continue with GitHub</b> → 깃허브 로그인 → <b>Authorize Vercel</b> 허용 → <b>Hobby(무료)</b> 선택</figcaption>
     </figure>
 
     <ol class="steps">
@@ -444,14 +426,10 @@
 
     <p>이제 안티그래비티 채팅창에 <strong>무엇을 만들고 싶은지</strong>를 글로 적습니다. 이 부탁하는 글을 <span class="hl">프롬프트(prompt)</span>라고 불러요. 어려운 단어를 쓸 필요가 전혀 없어요. <strong>눈에 보이듯이 구체적으로</strong> 설명하는 게 전부입니다.</p>
 
-    <figure class="screen">
-      <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">Antigravity — 채팅창</span></div>
-      <div class="view">
-        <div class="chat me">쇼츠 만드는 걸 도와주는 웹사이트를 만들어줘. 어두운 배경에 카드 3개 있는 첫 화면으로…</div>
-        <div class="chat ai">네! 첫 화면부터 만들어 드릴게요. 파일을 생성합니다… ✅ 완료했어요. 미리보기를 보여드릴게요.</div>
-        <div class="chat me">제목을 더 크게 해줘 🙂</div>
-      </div>
-      <figcaption class="cap">👉 채팅창에 <b>원하는 걸 우리말로</b> 적고 엔터 → AI가 화면·기능 생성 → 마음에 안 들면 계속 대화로 수정</figcaption>
+    <figure class="shot">
+      <img src="images/06-antigravity-chat.png" alt="안티그래비티 채팅창 화면" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div class="ph"><span class="ico">📸</span><b>여기에 실제 캡처를 넣으세요</b><span>안티그래비티 채팅창에 프롬프트를 입력한 화면</span><code>images/06-antigravity-chat.png</code></div>
+      <figcaption>👉 채팅창에 <b>원하는 걸 우리말로</b> 적고 엔터 → AI가 화면·기능 생성 → 마음에 안 들면 계속 대화로 수정</figcaption>
     </figure>
 
     <h3>좋은 프롬프트의 3가지 원칙</h3>
@@ -570,25 +548,18 @@
 
     <p>드디어 마지막! 버셀에서 <strong>깃허브 창고를 연결</strong>하면, 버셀이 그 안의 내용을 진짜 인터넷 주소로 띄워줍니다. 이 단계는 로그인이 필요해서 <strong>여러분이 직접</strong> 진행합니다. 어렵지 않아요.</p>
 
-    <figure class="screen">
-      <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">vercel.com/new</span></div>
-      <div class="view">
-        <p class="mk-lbl">Import Git Repository (깃허브 창고 가져오기)</p>
-        <div class="repo-row"><span>📦 shorts-lab</span><span class="btn-demo hot btn-primary">Import</span></div>
-        <div class="repo-row muted"><span>📦 another-project</span><span class="btn-demo btn-ghost">Import</span></div>
-      </div>
-      <figcaption class="cap">👉 목록에서 <b>shorts-lab</b> 찾아 옆의 <b>Import</b> 클릭 (안 보이면 "Adjust GitHub App Permissions"로 권한 열기)</figcaption>
+    <div class="linkbox">🔗 바로가기 <a href="https://vercel.com/new" target="_blank" rel="noopener">https://vercel.com/new</a></div>
+
+    <figure class="shot">
+      <img src="images/07-vercel-import.png" alt="버셀 창고 가져오기 화면" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div class="ph"><span class="ico">📸</span><b>여기에 실제 캡처를 넣으세요</b><span>vercel.com/new — 창고 목록에서 shorts-lab 옆 Import 버튼</span><code>images/07-vercel-import.png</code></div>
+      <figcaption>👉 목록에서 <b>shorts-lab</b> 옆 <b>Import</b> 클릭 (안 보이면 "Adjust GitHub App Permissions"로 권한 열기)</figcaption>
     </figure>
 
-    <figure class="screen">
-      <div class="bar"><span class="dots"><i></i><i></i><i></i></span><span class="url">vercel.com — Configure Project (빌드 설정)</span></div>
-      <div class="view">
-        <p class="mk-lbl">Framework Preset</p><div class="field val">Vite</div>
-        <p class="mk-lbl">Build Command</p><div class="field val">npm run build</div>
-        <p class="mk-lbl">Output Directory</p><div class="field val">dist</div>
-        <span class="btn-demo hot btn-primary" style="display:block; text-align:center; margin-top:16px">Deploy</span>
-      </div>
-      <figcaption class="cap">👉 세 값이 위와 같은지만 확인 (대개 자동으로 채워져 있음) → 큰 <b>Deploy</b> 버튼 클릭 → 1~3분 뒤 주소 발급 🎉</figcaption>
+    <figure class="shot">
+      <img src="images/08-vercel-deploy.png" alt="버셀 빌드 설정 및 Deploy 화면" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+      <div class="ph"><span class="ico">📸</span><b>여기에 실제 캡처를 넣으세요</b><span>빌드 설정(Vite / npm run build / dist) + Deploy 버튼 화면</span><code>images/08-vercel-deploy.png</code></div>
+      <figcaption>👉 Framework=Vite 확인 (대개 자동) → 큰 <b>Deploy</b> 클릭 → 1~3분 뒤 주소 발급 🎉</figcaption>
     </figure>
 
     <ol class="steps">
@@ -618,7 +589,7 @@
 
     <div class="box warn">
       <div class="t">⚠️ 배포가 빨간색(실패)으로 뜨면?</div>
-      <p>당황하지 마세요. 로그에 나온 <strong>빨간 글씨(에러 메시지)를 복사</strong>해서 안티그래비티 채팅창에 붙여넣고 <span class="hl">"버셀 배포에서 이 에러가 났어. 고쳐줘"</span>라고 부탁하세요. 고친 뒤 다시 push하면(5장) 버셀이 자동으로 다시 배포합니다. 자세한 건 9장 참고.</p>
+      <p>당황하지 마세요. 로그에 나온 <strong>빨간 글씨(에러 메시지)를 복사</strong>해서 안티그래비티 채팅창에 붙여넣고 <span class="hl">"버셀 배포에서 이 에러가 났어. 고쳐줘"</span>라고 부탁하세요. 고친 뒤 다시 push하면(5장) 버셀이 자동으로 다시 배포합니다. 자세한 건 아래 FAQ를 참고하세요.</p>
     </div>
   </section>
 
@@ -699,7 +670,7 @@
   <footer>
     <p><strong>수고하셨습니다 🎉</strong><br/>
     코딩 없이 · 가입부터 배포까지 · 0원으로 — 나만의 웹사이트를 세상에 공개했습니다.</p>
-    <p style="margin-top:14px; font-size:13px; color:var(--ink-soft)">이 전자책은 <code class="inline">shorts-lab</code> 실습 튜토리얼의 동반 교재입니다.<br/>브라우저의 인쇄(Ctrl/⌘+P) → "PDF로 저장"을 누르면 PDF 전자책으로도 보관할 수 있어요.</p>
+    <p style="margin-top:14px; font-size:13px; color:var(--ink-soft)">이 전자책은 <code class="inline">shorts-lab</code> 실습 튜토리얼의 동반 교재입니다.<br/>오른쪽 위 <strong>📄 PDF 다운로드</strong> 버튼으로 PDF로도 저장할 수 있어요.</p>
   </footer>
 
 </div>
