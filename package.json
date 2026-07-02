@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:cf": "vite build && wrangler pages dev dist",
+    "dev:api": "vercel dev",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -13,17 +13,19 @@
     "@huggingface/transformers": "^3.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.2"
+    "react-router-dom": "^6.26.2",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
+    "@types/ws": "^8.5.12",
+    "@vercel/node": "^3.2.24",
     "@vitejs/plugin-react": "^4.3.2",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.6.2",
-    "vite": "^5.4.8",
-    "wrangler": "^4.106.0"
+    "vite": "^5.4.8"
   }
 }

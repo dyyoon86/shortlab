@@ -2,6 +2,7 @@ node_modules
 dist
 dist-ssr
 .wrangler
+.vercel
 *.local
 .DS_Store
 .vscode/*

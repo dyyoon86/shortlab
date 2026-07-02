@@ -73,7 +73,13 @@ export default function Tts() {
         }),
       })
       if (!res.ok) {
-        throw new Error(`서버 오류 (${res.status}). 로컬(npm run dev)에서는 /api 함수가 없어 동작하지 않아요. Cloudflare Pages 배포 후 사용하세요.`)
+        let detail = ''
+        try { detail = (await res.json())?.error ?? '' } catch { /* noop */ }
+        throw new Error(
+          detail
+            ? `음성 생성 실패: ${detail}`
+            : `서버 오류 (${res.status}). 로컬 순수 vite(npm run dev)에서는 /api 함수가 안 떠요. 배포된 사이트 또는 'vercel dev'에서 사용하세요.`,
+        )
       }
       const blob = await res.blob()
       setAudioUrl(URL.createObjectURL(blob))
