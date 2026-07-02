@@ -16,6 +16,7 @@
 | `06-antigravity-chat.png` | 안티그래비티 채팅창에 프롬프트 입력한 화면 |
 | `07-vercel-import.png` | vercel.com/new — 창고 목록에서 **Import** 화면 |
 | `08-vercel-deploy.png` | 버셀 빌드 설정(Vite/dist) + **Deploy** 버튼 화면 |
+| `09-github-auth.png` | 안티그래비티가 깃허브 **로그인/허용**을 요청하는 화면 (첫 push 때) |
 
 ## 팁
 - 형식: **PNG** 권장 (JPG도 됨). 파일명·확장자를 위 표와 똑같이 맞추세요.
