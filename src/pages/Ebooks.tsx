@@ -12,6 +12,7 @@ type Book = {
   caption: string[]
   brand: string
   hasVideo: boolean
+  videoUrl?: string
   cardTitle: string
   bullets: string[]
   status: 'ready' | 'soon'
@@ -159,11 +160,21 @@ export default function Ebooks() {
                   ))}
                 </div>
                 <div className="shrink-0 text-right">
-                  {b.hasVideo && (
-                    <span className="block text-[10px] font-semibold text-white/70">
-                      ▶ 원본 영상 보기
-                    </span>
-                  )}
+                  {b.hasVideo &&
+                    (b.videoUrl ? (
+                      <a
+                        href={b.videoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-[10px] font-semibold text-white/80 hover:text-white"
+                      >
+                        ▶ 원본 영상 보기
+                      </a>
+                    ) : (
+                      <span className="block text-[10px] font-semibold text-white/50">
+                        ▶ 영상 준비중
+                      </span>
+                    ))}
                   <span className="block text-[10px] text-white/40">{b.brand}</span>
                 </div>
               </div>
