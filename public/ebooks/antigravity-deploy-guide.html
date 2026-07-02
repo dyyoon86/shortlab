@@ -149,6 +149,16 @@
     border:1px solid var(--blue-100); background:var(--blue-50); border-radius:12px; font-size:14px; font-weight:700; color:var(--blue-700)}
   .linkbox a{color:var(--blue); text-decoration:none; word-break:break-all}
   .linkbox a:hover{text-decoration:underline}
+  .shot .ph{cursor:pointer}
+  .paste-btn{margin-top:12px; display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+    background:var(--blue); color:#fff; border:0; font-weight:700; font-size:13px; font-family:inherit;
+    padding:9px 16px; border-radius:10px; box-shadow:0 2px 6px rgba(21,93,252,.3)}
+  .paste-btn:hover{filter:brightness(1.08)}
+  .shot-tools{display:flex; gap:8px; margin-top:10px}
+  .st-btn{cursor:pointer; font-family:inherit; font-weight:700; font-size:12.5px; padding:7px 13px; border-radius:9px;
+    border:1px solid var(--border-2); background:var(--surface); color:var(--ink)}
+  .st-btn.ghost{color:var(--ink-dim)}
+  .st-btn:hover{background:#f1f3f7}
 
   /* ===== PDF 다운로드 버튼 (떠다니는) ===== */
   .pdf-dl{position:fixed; top:18px; right:18px; z-index:50; display:inline-flex; align-items:center; gap:6px;
@@ -158,7 +168,7 @@
   @media (max-width:640px){.pdf-dl{top:10px; right:10px; padding:8px 12px; font-size:13px}}
 
   @media print{
-    .pdf-dl{display:none}
+    .pdf-dl,.paste-btn,.shot-tools{display:none !important}
     body{background:#fff}
     .wrap{max-width:100%}
     .hero,.toc,.tool,details{box-shadow:none}
@@ -674,5 +684,108 @@
   </footer>
 
 </div>
+
+<script>
+(function () {
+  var KEY = 'ebook-shot:'
+  var armed = null
+
+  function fileOf(fig) {
+    var c = fig.querySelector('.ph code')
+    return c ? c.textContent.trim().replace(/^images\//, '') : null
+  }
+
+  function showImg(fig, dataUrl) {
+    var img = fig.querySelector('img')
+    var ph = fig.querySelector('.ph')
+    img.src = dataUrl
+    img.style.display = 'block'
+    if (ph) ph.style.display = 'none'
+    if (fig.querySelector('.shot-tools')) return
+    var file = fileOf(fig)
+    var bar = document.createElement('div')
+    bar.className = 'shot-tools'
+    var dl = document.createElement('button')
+    dl.type = 'button'; dl.className = 'st-btn'; dl.textContent = '💾 파일로 저장 (' + file + ')'
+    dl.addEventListener('click', function () {
+      var a = document.createElement('a')
+      a.href = fig.querySelector('img').src; a.download = file; a.click()
+    })
+    var rm = document.createElement('button')
+    rm.type = 'button'; rm.className = 'st-btn ghost'; rm.textContent = '✕ 지우기'
+    rm.addEventListener('click', function () {
+      try { localStorage.removeItem(KEY + file) } catch (e) {}
+      var img2 = fig.querySelector('img')
+      img2.src = ''; img2.style.display = 'none'
+      fig.querySelector('.ph').style.display = 'flex'
+      bar.remove()
+    })
+    bar.appendChild(dl); bar.appendChild(rm)
+    fig.insertBefore(bar, fig.querySelector('figcaption'))
+  }
+
+  function useBlob(fig, blob) {
+    var reader = new FileReader()
+    reader.onload = function () {
+      try { localStorage.setItem(KEY + fileOf(fig), reader.result) } catch (e) {}
+      showImg(fig, reader.result)
+    }
+    reader.readAsDataURL(blob)
+  }
+
+  async function pasteInto(fig) {
+    if (navigator.clipboard && navigator.clipboard.read) {
+      try {
+        var items = await navigator.clipboard.read()
+        for (var i = 0; i < items.length; i++) {
+          var t = items[i].types.find(function (x) { return x.indexOf('image/') === 0 })
+          if (t) { useBlob(fig, await items[i].getType(t)); return }
+        }
+        alert('클립보드에 이미지가 없어요.\n먼저 화면을 캡처(Win+Shift+S / Mac ⌘⇧4)한 뒤 다시 눌러주세요.')
+        return
+      } catch (e) { /* 권한 막힘 → Ctrl+V 폴백 */ }
+    }
+    armed = fig
+    var ph = fig.querySelector('.ph')
+    if (ph) ph.style.outline = '3px solid #155dfc'
+    alert('이 슬롯을 선택했어요.\n이제 Ctrl+V (Mac ⌘V) 를 누르면 캡처가 들어갑니다.')
+  }
+
+  document.addEventListener('paste', function (e) {
+    if (!armed) return
+    var items = e.clipboardData && e.clipboardData.items
+    if (!items) return
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf('image/') === 0) {
+        useBlob(armed, items[i].getAsFile())
+        var ph = armed.querySelector('.ph'); if (ph) ph.style.outline = ''
+        armed = null; e.preventDefault(); return
+      }
+    }
+  })
+
+  document.querySelectorAll('.shot').forEach(function (fig) {
+    var ph = fig.querySelector('.ph')
+    if (!ph) return
+    // 붙여넣기 버튼
+    var btn = document.createElement('button')
+    btn.type = 'button'; btn.className = 'paste-btn'; btn.textContent = '📋 클립보드에서 붙여넣기'
+    btn.addEventListener('click', function (ev) { ev.stopPropagation(); pasteInto(fig) })
+    ph.appendChild(btn)
+    // 안내 영역 아무 데나 클릭해도 붙여넣기
+    ph.addEventListener('click', function () { pasteInto(fig) })
+    // 이전에 붙여넣어 저장해둔 게 있으면 복원 (실제 파일이 없을 때만)
+    var img = fig.querySelector('img')
+    var file = fileOf(fig)
+    var saved = null
+    try { saved = file && localStorage.getItem(KEY + file) } catch (e) {}
+    if (saved) {
+      if (img.complete && img.naturalWidth > 0) return // 실제 파일 우선
+      img.addEventListener('error', function () { showImg(fig, saved) })
+      if (img.complete && img.naturalWidth === 0) showImg(fig, saved)
+    }
+  })
+})()
+</script>
 </body>
 </html>
