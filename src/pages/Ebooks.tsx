@@ -16,6 +16,7 @@ type Book = {
   bullets: string[]
   status: 'ready' | 'soon'
   href?: string
+  pdf?: string
 }
 
 const BOOKS: Book[] = [
@@ -35,6 +36,7 @@ const BOOKS: Book[] = [
     bullets: ['가입 → 프롬프트 → 배포까지 한 권', '안티그래비티·깃허브·버셀 전부 무료'],
     status: 'ready',
     href: '/ebooks/antigravity-deploy-guide.html',
+    pdf: '/ebooks/antigravity-deploy-guide.pdf',
   },
   {
     id: 'ai-voice',
@@ -183,12 +185,11 @@ export default function Ebooks() {
 
             {b.status === 'ready' ? (
               <a
-                href={b.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={b.pdf}
+                download
                 className="mt-5 flex items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-300 px-4 py-3.5 text-base font-bold text-gray-900 shadow-sm transition hover:brightness-105"
               >
-                🎁 무료로 읽기 →
+                📄 PDF 무료 다운로드
               </a>
             ) : (
               <div className="mt-5 flex cursor-not-allowed items-center justify-center gap-1.5 rounded-xl bg-gray-100 px-4 py-3.5 text-base font-bold text-gray-400">
