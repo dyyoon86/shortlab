@@ -8,7 +8,7 @@
 
 - 프로젝트 이름: `shorts-lab`
 - 프레임워크: Vite + React + TypeScript + Tailwind CSS
-- 배포 방식: 대부분 정적 사이트 + Cloudflare Pages Function 1개 (AI 성우 기능만)
+- 배포 방식: 대부분 정적 사이트 + Vercel 서버리스 함수 1개 (AI 성우 기능만, Node.js 런타임)
 - 디자인: 아래 "디자인 토큰" 그대로 사용
 - 기능 3개: AI 성우(TTS) / 영상 자막 추출(한국어) / 무음 제거
 - 번역 기능은 없음. 일본어 관련 처리도 없음.

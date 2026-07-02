@@ -7,6 +7,7 @@ import Landing from './pages/Landing'
 import Tts from './pages/Tts'
 import Subtitle from './pages/Subtitle'
 import Silence from './pages/Silence'
+import Ebooks from './pages/Ebooks'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path="/tts" element={<Tts />} />
           <Route path="/subtitle" element={<Subtitle />} />
           <Route path="/silence" element={<Silence />} />
+          <Route path="/ebooks" element={<Ebooks />} />
         </Routes>
       </Layout>
     </BrowserRouter>

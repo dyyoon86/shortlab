@@ -19,6 +19,12 @@ const FEATURES = [
     title: '무음 제거',
     desc: '영상·오디오에서 조용한 구간을 자동으로 찾아 잘라줘요.',
   },
+  {
+    to: '/ebooks',
+    emoji: '📚',
+    title: '전자책 서재',
+    desc: '가입부터 배포까지, 따라 하는 실습 전자책을 모아뒀어요.',
+  },
 ]
 
 export default function Landing() {
@@ -47,7 +53,7 @@ export default function Landing() {
       </p>
 
       {/* 기능 카드 */}
-      <div className="mt-12 grid w-full max-w-4xl gap-4 sm:grid-cols-3">
+      <div className="mt-12 grid w-full max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {FEATURES.map((f) => (
           <Link
             key={f.to}

@@ -4,6 +4,7 @@ const MENU = [
   { to: '/tts', emoji: '🎙️', title: 'AI 성우', desc: '한·일·영·중 내레이션' },
   { to: '/subtitle', emoji: '📝', title: '영상 자막 추출', desc: '한국어 자막(SRT)' },
   { to: '/silence', emoji: '✂️', title: '무음 제거', desc: '조용한 구간 자동 컷' },
+  { to: '/ebooks', emoji: '📚', title: '전자책 서재', desc: '실습 가이드 모음' },
 ]
 
 export default function Sidebar() {
